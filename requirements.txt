@@ -1,0 +1,6 @@
+duckduckgo_search
+httpx
+pandas
+newsapi-python
+flask
+requests
