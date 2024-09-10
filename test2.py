@@ -1,7 +1,6 @@
-
-
 from flask import Flask, request, jsonify
 import requests
+from langchain_community.document_loaders import UnstructuredURLLoader
 
 app = Flask(__name__)
 
@@ -32,7 +31,13 @@ def get_news():
     url_data = data['articles'][0]['url']
     
     # Return the URL as a JSON response
-    return jsonify({'url': url_data})
+    news_url = [url_data]
+
+    # Load the news data synchronously
+    loader = UnstructuredURLLoader(urls=news_url)
+    news_data = loader.load()[0]
+    print(news_data)
+  
 
 if __name__ == '__main__':
     app.run(debug=True)
